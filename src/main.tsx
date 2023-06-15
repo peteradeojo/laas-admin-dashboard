@@ -12,11 +12,21 @@ import { store } from './store';
 
 import './index.scss';
 import Home from './pages/Home';
+import ProtectedRoutes from '@components/ProtectedRoutes';
+import DashboardLayout from '@layouts/Dashboard';
+import Dashboard from '@pages/Dashboard';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<>
 			<Route index element={<Home />} />
+
+			<Route element={<ProtectedRoutes />}>
+				<Route element={<DashboardLayout />}>
+					<Route path="dashboard" element={<Dashboard />} />
+					<Route path='users' />
+				</Route>
+			</Route>
 		</>
 	)
 );

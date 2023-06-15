@@ -1,0 +1,13 @@
+.btn {
+  padding: 8px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 4px;
+  background-color: $primaryAccentColor;
+  color: #fff;
+
+  .btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

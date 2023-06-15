@@ -11,5 +11,16 @@ export default defineConfig(({ command, mode }) => {
 		define: {
 			__APP_ENV__: env,
 		},
+		resolve: {
+			alias: {
+				'@': '/src',
+				'@components': '/src/components',
+				'@pages': '/src/pages',
+				'@utils': '/src/utils',
+				'@layouts': '/src/layouts',
+				'@assets': '/src/assets',
+				'@styles': '/src/styles',
+			}
+		}
 	};
 });

@@ -1,0 +1,120 @@
+$paddingFactor: 1;
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+
+  &.around {
+    justify-content: space-around;
+  }
+
+  &.start {
+    justify-content: flex-start;
+  }
+
+  &.end {
+    justify-content: flex-end;
+  }
+
+  &.center {
+    align-items: center;
+  }
+
+  &.evenly {
+    justify-content: space-evenly;
+  }
+
+  // &.centered{
+  //   align-items: center;
+  // }
+}
+
+
+@for $i from 1 through 15 {
+  .col-#{$i} {
+    flex: 0 0 calc(100% / 15 * #{$i});
+    width: calc(100% / 15 * #{$i});
+  }
+}
+
+@for $i from 1 through 5 {
+
+  // Generate for paddings and margins on all sides
+  .p-#{$i} {
+    padding: #{$i * $paddingFactor}rem;
+  }
+
+  .m-#{$i} {
+    margin: #{$i * $paddingFactor}rem;
+  }
+
+  // Generate for paddings and margins on top and bottom
+  .pt-#{$i} {
+    padding-top: #{$i * $paddingFactor}rem;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{$i * $paddingFactor}rem;
+  }
+
+  .mt-#{$i} {
+    margin-top: #{$i * $paddingFactor}rem;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{$i * $paddingFactor}rem;
+  }
+
+  // Generate for paddings and margins on left and right
+  .pl-#{$i} {
+    padding-left: #{$i * $paddingFactor}rem;
+  }
+
+  .pr-#{$i} {
+    padding-right: #{$i * $paddingFactor}rem;
+  }
+
+  .ml-#{$i} {
+    margin-left: #{$i * $paddingFactor}rem;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i * $paddingFactor}rem;
+  }
+
+  // Generate for paddings and margins on left and right
+  .px-#{$i} {
+    padding-left: #{$i * $paddingFactor}rem;
+    padding-right: #{$i * $paddingFactor}rem;
+  }
+
+  .mx-#{$i} {
+    margin-left: #{$i * $paddingFactor}rem;
+    margin-right: #{$i * $paddingFactor}rem;
+  }
+
+  // Generate for paddings and margins on top and bottom
+  .py-#{$i} {
+    padding-top: #{$i * $paddingFactor}rem;
+    padding-bottom: #{$i * $paddingFactor}rem;
+  }
+
+  .my-#{$i} {
+    margin-top: #{$i * $paddingFactor}rem;
+    margin-bottom: #{$i * $paddingFactor}rem;
+  }
+}
+
+.rest {
+  flex: 1;
+  max-width: 100%;
+}

@@ -1,0 +1,17 @@
+@import '@styles/animations';
+@import '@styles/variables';
+
+.card {
+  padding: 16px;
+  // border-radius: 20px;
+  // border: 1px solid #ccc;
+  // box-shadow: 0 0 8px rgba(255, 242, 242, 0.603);
+  border-radius: 27px;
+  background: #ffffff;
+  box-shadow: 9px 9px 25px #d6d6d6,
+    -9px -9px 25px #ffffff;
+
+  &.popper:hover {
+    @include pop-animation();
+  }
+}

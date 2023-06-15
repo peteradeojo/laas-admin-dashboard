@@ -1,0 +1,25 @@
+.error {
+  background-color: red;
+  padding: 6px 4px;
+  color: #fff;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  flex-basis: content;
+  align-items: center;
+
+  p {
+    flex-grow: 2;
+  }
+
+  .close {
+    width: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(red, 5%);
+    }
+  }
+}
