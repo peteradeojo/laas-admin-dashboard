@@ -5,14 +5,13 @@ import { useGetRecentUsersQuery } from '@/services/userApi';
 
 import { Link } from 'react-router-dom';
 import styles from './style.module.scss';
-import { ReactElement } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 
-type User = {
-	name: string;
-	email: string;
+interface UserProps extends PropsWithChildren {
+	users: any[];
 }
 
-const UserList = ({ users }: { users: User[] }) => {
+const UserList = ({ users }: UserProps) => {
 	if (users.length < 1) {
 		return <li className={styles.userListItem}>No recent user</li>;
 	}
