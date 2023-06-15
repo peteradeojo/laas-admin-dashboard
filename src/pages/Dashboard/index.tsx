@@ -7,7 +7,12 @@ import { Link } from 'react-router-dom';
 import styles from './style.module.scss';
 import { ReactElement } from 'react';
 
-const UserList = ({ users }: { users: any[] }) => {
+type User = {
+	name: string;
+	email: string;
+}
+
+const UserList = ({ users }: { users: User[] }) => {
 	if (users.length < 1) {
 		return <li className={styles.userListItem}>No recent user</li>;
 	}

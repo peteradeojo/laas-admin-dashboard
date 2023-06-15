@@ -15,7 +15,7 @@ const Home = (): ReactElement => {
 		e.preventDefault();
 
 		try {
-			const { data, message } = await login({ email, password }).unwrap();
+			const { data } = await login({ email, password }).unwrap();
 			localStorage.setItem('authToken', data.token);
 			navigate('/dashboard');
 		} catch (err) {
