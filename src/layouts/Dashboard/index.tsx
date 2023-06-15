@@ -6,9 +6,7 @@ import styles from './style.module.scss';
 const DashboardLayout = () => {
 	return (
 		<div className={'row wrap position-relative'}>
-			<Navigation
-				user={{ name: 'Boluwatife Ade-Ojo', email: 'adeojopeter@gmail.com' }}
-			/>
+			<Navigation />
 			<div className={styles.mainPage}>
 				<div className="container">
 					<Outlet />
