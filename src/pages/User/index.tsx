@@ -2,7 +2,7 @@ import { GenericCard } from '@/components/Card';
 import ErrorMessage from '@/components/ErrorMessage';
 import { useGetUserQuery } from '@/services/userApi';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Tag, UserRole } from '../Users';
+import { Tag } from '../Users';
 
 interface UserProps {
 	user: {

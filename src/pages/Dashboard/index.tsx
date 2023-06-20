@@ -1,7 +1,7 @@
 import { GenericCard } from '@components/Card';
 import { MdPersonOutline, MdWorkspaces } from 'react-icons/md';
 import { useAnalyticsQuery } from '@/services/api';
-import { useGetUsersQuery, useGetRecentUsersQuery } from '@/services/userApi';
+import { useGetRecentUsersQuery } from '@/services/userApi';
 
 import { Link } from 'react-router-dom';
 import styles from './style.module.scss';

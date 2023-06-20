@@ -1,6 +1,6 @@
 import ErrorMessage from '@/components/ErrorMessage';
 import { useGetUsersQuery } from '@/services/userApi';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './style.module.scss';
@@ -26,9 +26,9 @@ export const Tag = ({
 };
 
 const Users = () => {
-	const [page, setPage] = useState(1);
+	// const [page, setPage] = useState(1);
 
-	const usersHook = useGetUsersQuery({ page: page, count: 20 });
+	const usersHook = useGetUsersQuery({ page: 1, count: 20 });
 
 	return (
 		<>
