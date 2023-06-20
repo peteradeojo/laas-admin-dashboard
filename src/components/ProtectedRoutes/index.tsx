@@ -12,7 +12,7 @@ const ProtectedRoutes = () => {
 			) : isLoading ? (
 				<>Loading</>
 			) : data ? (
-				(console.log(data), (<Outlet />))
+				<Outlet />
 			) : (
 				<>Can't tell what's up</>
 			)}

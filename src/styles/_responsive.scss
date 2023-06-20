@@ -3,7 +3,6 @@ $paddingFactor: 1;
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
 
   &.wrap {
     flex-wrap: wrap;
@@ -42,7 +41,7 @@ $paddingFactor: 1;
 @for $i from 1 through 15 {
   .col-#{$i} {
     flex: 0 0 calc(100% / 15 * #{$i});
-    width: calc(100% / 15 * #{$i});
+    // width: calc(100% / 15 * #{$i});
   }
 }
 

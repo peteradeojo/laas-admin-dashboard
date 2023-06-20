@@ -15,6 +15,8 @@ import Home from './pages/Home';
 import ProtectedRoutes from '@components/ProtectedRoutes';
 import DashboardLayout from '@layouts/Dashboard';
 import Dashboard from '@pages/Dashboard';
+import Users from './pages/Users';
+import User from './pages/User';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -24,7 +26,8 @@ const router = createBrowserRouter(
 			<Route element={<ProtectedRoutes />}>
 				<Route element={<DashboardLayout />}>
 					<Route path="dashboard" element={<Dashboard />} />
-					<Route path='users' />
+					<Route path='users' element={<Users />} />
+					<Route path='users/:id' element={<User />} />
 				</Route>
 			</Route>
 		</>

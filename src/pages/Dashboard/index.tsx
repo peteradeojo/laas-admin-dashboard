@@ -1,7 +1,7 @@
 import { GenericCard } from '@components/Card';
 import { MdPersonOutline, MdWorkspaces } from 'react-icons/md';
 import { useAnalyticsQuery } from '@/services/api';
-import { useGetRecentUsersQuery } from '@/services/userApi';
+import { useGetUsersQuery, useGetRecentUsersQuery } from '@/services/userApi';
 
 import { Link } from 'react-router-dom';
 import styles from './style.module.scss';
@@ -16,7 +16,16 @@ const UserList = ({ users }: UserProps) => {
 		return <li className={styles.userListItem}>No recent user</li>;
 	}
 
-	return users.map((user: any) => <li className={styles.userListItem}>{user.name}</li>);
+	return users.map((user, index) => (
+		<li className={styles.userListItem} key={index}>
+			<img
+				src={`https://ui-avatars.com/api/?name=${user.name}`}
+				className="circle"
+				alt=""
+			/>
+			<Link to={`/users/${user._id}`}>{user.name}</Link>
+		</li>
+	));
 };
 
 const AnalyticCard = ({
@@ -46,7 +55,7 @@ const Dashboard = () => {
 		isError: IsUserError,
 		isLoading: usersLoading,
 		error: usersError,
-	} = useGetRecentUsersQuery('');
+	} = useGetRecentUsersQuery({});
 
 	return (
 		<>

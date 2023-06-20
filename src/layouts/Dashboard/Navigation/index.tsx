@@ -1,13 +1,13 @@
 import styles from './style.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdPerson, MdHome, MdSettings, MdLogout } from 'react-icons/md';
 
 const Navigation = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const logout = () => {
 		localStorage.removeItem('authToken');
-		navigate('/');
+		window.location.reload();
 	};
 
 	return (

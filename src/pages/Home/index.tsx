@@ -61,6 +61,7 @@ const Home = (): ReactElement => {
 							</div>
 						</div>
 					</form>
+					{loginResult.isLoading && <ErrorMessage message='Loading. Please wait' />}
 					{loginResult.isError && (
 						<ErrorMessage message={(loginResult.error as any).data?.message} />
 					)}
