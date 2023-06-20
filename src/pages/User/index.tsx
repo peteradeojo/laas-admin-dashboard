@@ -3,6 +3,7 @@ import ErrorMessage from '@/components/ErrorMessage';
 import { useGetUserQuery } from '@/services/userApi';
 import { useParams, Navigate } from 'react-router-dom';
 import { Tag } from '../Users';
+import moment from 'moment';
 
 interface UserProps {
 	user: {
@@ -20,15 +21,17 @@ const UserDisplay = ({ user }: UserProps) => {
 			<div className="pb-3">
 				<h1>{user.name}</h1>
 				<h3>
-					<a href={`mailto:${user.email}`} target='_blank'>{user.email}</a>
+					<a href={`mailto:${user.email}`} target="_blank">
+						{user.email}
+					</a>
 				</h3>
 			</div>
 
 			<div className="row wrap">
 				{user.apps?.map((app: any) => (
 					<div className="col-4 mx-1">
-						<GenericCard>
-							<h2>{app.title}</h2>
+						<GenericCard pops>
+							<h2 className="pb-1">{app.title}</h2>
 							<p>
 								<b>Status: </b>{' '}
 								{app.token ? (
@@ -39,7 +42,7 @@ const UserDisplay = ({ user }: UserProps) => {
 							</p>
 							<p>
 								<b>Created: </b>
-								{app.createdAt}
+								{moment(app.createdAt).format('MMMM Do Y, hh:mm:ss')}
 							</p>
 						</GenericCard>
 					</div>
