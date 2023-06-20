@@ -1,7 +1,7 @@
 import { GenericCard } from '@/components/Card';
 import ErrorMessage from '@/components/ErrorMessage';
 import { useGetUserQuery } from '@/services/userApi';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { Tag } from '../Users';
 
 interface UserProps {
@@ -51,10 +51,9 @@ const UserDisplay = ({ user }: UserProps) => {
 
 const User = () => {
 	const { id } = useParams<{ id: string }>();
-	const navigate = useNavigate();
 
 	if (!id) {
-		return navigate('/users');
+		return <Navigate to={'/users'} />;
 	}
 
 	const userHook = useGetUserQuery({ id });
