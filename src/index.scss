@@ -1,27 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap");
 
-@import 'styles/variables';
-@import 'styles/animations';
+@import "styles/variables";
+@import "styles/animations";
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-size: 16px;
-  font-family: 'Quicksand', sans-serif;
-  background-color: $primary-color;
-  color: $primaryTextColor;
+  font-family: "Quicksand", sans-serif;
 }
 
 .container {
   padding: 16px;
 }
 
-@import 'styles/forms';
-@import 'styles/buttons';
+@import "styles/forms";
+@import "styles/buttons";
 
 .bg-primary {
   background-color: blue;
@@ -31,5 +28,5 @@ body {
   position: relative;
 }
 
-@import 'styles/responsive';
-@import 'styles/fonts';
+@import "styles/responsive";
+@import "styles/fonts";
