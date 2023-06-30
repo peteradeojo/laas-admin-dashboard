@@ -1,93 +1,65 @@
-import { GenericCard } from '@components/Card';
+
 import { MdPersonOutline, MdWorkspaces } from 'react-icons/md';
 import { useAnalyticsQuery } from '@/services/api';
 import { useGetRecentUsersQuery } from '@/services/userApi';
 
-import { Link } from 'react-router-dom';
-import styles from './style.module.scss';
-import { PropsWithChildren, ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface UserProps extends PropsWithChildren {
-	users: any[];
-}
-
-const UserList = ({ users }: UserProps) => {
-	if (users.length < 1) {
-		return <li className={styles.userListItem}>No recent user</li>;
-	}
-
-	return users.map((user, index) => (
-		<li className={styles.userListItem} key={index}>
-			<img
-				src={`https://ui-avatars.com/api/?name=${user.name}`}
-				className="circle"
-				alt=""
-			/>
-			<Link to={`/users/${user._id}`}>{user.name}</Link>
-		</li>
-	));
-};
-
-const AnalyticCard = ({
-	icon,
-	qty = 0,
-	title,
-}: {
-	icon: ReactElement;
-	qty?: string | number;
-	title: string;
-}) => {
-	return (
-		<div className={'col-3 mx-1 ' + styles.AnalyticCard1}>
-			<GenericCard pops>
-				{icon}
-				<p className={styles.weight}>{qty}</p>
-				<p className={styles.AcTitle}>{title}</p>
-			</GenericCard>
-		</div>
-	);
-};
+import { useEffect, useState } from 'react';
+import { UsersComponent, Widget } from '@/components';
+import { Spin, notification } from 'antd';
 
 const Dashboard = () => {
+	const navigate = useNavigate()
+	const [usersData, setUsersData] = useState<any>();
+	const [dashboardData, setDashboardData] = useState<any>();
 	const { data: analytics } = useAnalyticsQuery('');
 	const {
 		data: users,
-		isError: IsUserError,
 		isLoading: usersLoading,
 		error: usersError,
 	} = useGetRecentUsersQuery({});
 
+	useEffect(() => {
+		if (analytics && users) {
+			setDashboardData(analytics?.data);
+			setUsersData(users?.data);
+		}
+
+	}, [analytics, users]);
+
+	useEffect(() => {
+		if (usersError) {
+			const errorMesg = (usersError) as any
+			notification.error({
+				message: errorMesg.data.message,
+				duration: 3,
+				placement: "topRight",
+			});
+		}
+	}, [usersError]);
 	return (
 		<>
-			<h1>Analytics</h1>
-
 			<div className="mt-2">
-				<div className={'row wrap start ' + styles.Analytics}>
-					<AnalyticCard
-						icon={<MdPersonOutline />}
-						qty={analytics?.data.users?.total}
-						title="Registered Users"
-					/>
-					<AnalyticCard
-						icon={<MdWorkspaces />}
-						qty={analytics?.data.apps?.total}
-						title="Active Applications"
-					/>
+				<div className='w-full flex gap-2 flex-wrap lg:flex-nowrap'>
+
+					<Widget icon={<MdPersonOutline />} value={dashboardData?.users?.total} title='Registered Users' />
+					<Widget icon={<MdWorkspaces />} value={dashboardData?.apps?.total} title='Active Applications' />
 				</div>
 
-				<div className="row between mt-3">
-					<h2>Recent users</h2>
-					<Link to="/users">View All</Link>
+				<div className="flex flex-col gap-3 mt-2 bg-[#fff] p-1">
+					<div className="flex items-center justify-between">
+						<h3 className='text-[18px] font-medium text-mainColor'>Recent Users</h3>
+						<span className='underline text-mainColor font-medium cursor-pointer' onClick={() => {
+							navigate("/dashboard/users")
+						}}>View All</span>
+					</div>					{
+						usersLoading ? (<Spin />) : (
+							<UsersComponent data={usersData} />
+						)
+					}
 				</div>
-				<ul className={styles.recentUsersList + ' mt-1'}>
-					{usersLoading ? (
-						<li>Loading data</li>
-					) : IsUserError ? (
-						<li>{(usersError as any).data.message}</li>
-					) : (
-						<UserList users={users.data} />
-					)}
-				</ul>
+
 			</div>
 		</>
 	);

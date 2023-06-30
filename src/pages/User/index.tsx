@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { GenericCard } from '@/components/Card';
 import ErrorMessage from '@/components/ErrorMessage';
 import { useGetUserQuery } from '@/services/userApi';
 import { useParams, Navigate } from 'react-router-dom';
-import { Tag } from '../Users';
+// import { Tag } from '../Users';
 import moment from 'moment';
 
 interface UserProps {
@@ -35,9 +37,16 @@ const UserDisplay = ({ user }: UserProps) => {
 							<p>
 								<b>Status: </b>{' '}
 								{app.token ? (
-									<Tag tag="active" className="admin" />
+									<>
+
+										{/* <Tag tag="active" className="admin" /> */}
+
+									</>
 								) : (
-									<Tag tag="inactive" />
+									<>
+										{/* <Tag tag="inactive" /> */}
+
+									</>
 								)}
 							</p>
 							<p>

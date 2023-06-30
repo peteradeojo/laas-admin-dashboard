@@ -13,6 +13,21 @@
   font-family: "Quicksand", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #061a40;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #020916;
+}
+
 .container {
   padding: 16px;
 }
