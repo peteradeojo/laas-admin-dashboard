@@ -1,17 +1,16 @@
+import { Sidebar } from '@/components';
 import { Outlet } from 'react-router-dom';
-import Navigation from './Navigation';
 
-import styles from './style.module.scss';
-import BackButton from '@/components/BackButton';
 
 const DashboardLayout = () => {
 	return (
 		<>
-			<Navigation />
-			<div className={styles.mainPage}>
-				<div className="container">
-					<BackButton />
-					<Outlet />
+			<div className="flex">
+				<Sidebar />
+				<div className="w-full">
+					<div className="p-2 bg-[#f8f8f8] h-screen">
+						<Outlet />
+					</div>
 				</div>
 			</div>
 		</>
