@@ -2,10 +2,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { GenericCard } from '@/components/Card';
 import ErrorMessage from '@/components/ErrorMessage';
-import { useGetUserQuery } from '@/services/userApi';
+import { useGetUserQuery } from '@/services/Api/userApi';
 import { useParams, Navigate } from 'react-router-dom';
 // import { Tag } from '../Users';
 import moment from 'moment';
+import React from 'react';
 
 interface UserProps {
 	user: {
