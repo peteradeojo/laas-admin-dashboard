@@ -1,7 +1,7 @@
 
 import { MdPersonOutline, MdWorkspaces } from 'react-icons/md';
-import { useAnalyticsQuery } from '@/services/api';
-import { useGetRecentUsersQuery } from '@/services/userApi';
+import { useAnalyticsQuery } from '@/services/Api/api';
+import { useGetRecentUsersQuery } from '@/services/Api/userApi';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -21,9 +21,11 @@ const Dashboard = () => {
 	} = useGetRecentUsersQuery({});
 
 	useEffect(() => {
-		if (analytics && users) {
+		if (analytics) {
 			setDashboardData(analytics?.data);
-			setUsersData(users?.data);
+		}
+		if (users) {
+			setUsersData(users);
 		}
 
 	}, [analytics, users]);

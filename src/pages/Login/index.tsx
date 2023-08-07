@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FormEventHandler, ReactElement, useEffect, useState } from 'react';
-import { useLoginMutation } from '../../services/api';
+import { useLoginMutation } from '../../services/Api/api';
 import { useNavigate } from 'react-router-dom';
 import { FilledButton } from '@/shared/UIs/CustomButton';
 import { notification, Spin } from 'antd';
@@ -22,6 +22,7 @@ const Login = (): ReactElement => {
 			console.error(err);
 		}
 	};
+
 	useEffect(() => {
 		if (isSuccess) {
 			notification.success({
@@ -29,7 +30,7 @@ const Login = (): ReactElement => {
 				duration: 3,
 				placement: "topRight",
 			});
-			sessionStorage.setItem('authToken', data?.data.token);
+			sessionStorage.setItem('authToken', data?.data?.token);
 			setEmail('');
 			setPassword('');
 			navigate('/dashboard');
@@ -46,6 +47,10 @@ const Login = (): ReactElement => {
 			});
 		}
 	}, [error]);
+
+	useEffect(() => {
+		sessionStorage.clear()
+	}, [])
 
 	return (
 		<>

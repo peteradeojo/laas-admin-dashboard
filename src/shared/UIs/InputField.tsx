@@ -3,7 +3,6 @@ import { BsSearch } from 'react-icons/bs';
 import { Radio } from 'antd';
 import type { DatePickerProps, RadioChangeEvent } from 'antd';
 import Select from "react-select";
-import { type } from 'os';
 
 const { TextArea } = Input;
 
@@ -31,6 +30,7 @@ interface IProps {
     handleDateChange?: any
     type?: string
     name?: string
+    disabled?: boolean
 
 }
 export const SearchInput = ({ onChange, inputValue, onKeyDown }: IProps) => {
@@ -46,7 +46,7 @@ export const SearchInput = ({ onChange, inputValue, onKeyDown }: IProps) => {
     )
 }
 
-export const InputField = ({ type, name, onChange, inputValue, placeholder, title, }: IProps) => {
+export const InputField = ({ type, name, onChange, disabled, inputValue, placeholder, title, }: IProps) => {
     return (
         <div className="flex flex-col gap-2 ">
             {
@@ -59,6 +59,7 @@ export const InputField = ({ type, name, onChange, inputValue, placeholder, titl
                 className={` border-1 h-[40px] rounded-md placeholder:text-sm focus:outline-none`}
                 onChange={onChange}
                 value={inputValue}
+                disabled={disabled}
                 required
             />
         </div>
