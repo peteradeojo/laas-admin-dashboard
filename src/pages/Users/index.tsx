@@ -1,5 +1,5 @@
 
-import { useGetUsersQuery } from '@/services/userApi';
+import { useGetUsersQuery } from '@/services/Api/userApi';
 import { UsersComponent } from '@/components';
 import { useEffect, useState } from 'react';
 import { Spin, notification } from 'antd';
@@ -9,13 +9,13 @@ const Users = () => {
 	const [page] = useState<number>(1);
 	const [count] = useState<number>(20);
 
-	const { data, isLoading, error } = useGetUsersQuery({ page: page, count: count });
+	const { data, isLoading, error, isSuccess } = useGetUsersQuery({ page: page, count: count });
 
 	useEffect(() => {
 		if (error) {
 			const errorMesg = (error) as any
 			notification.error({
-				message: errorMesg.data.message,
+				message: errorMesg?.data?.message,
 				duration: 3,
 				placement: "topRight",
 			});
@@ -23,10 +23,13 @@ const Users = () => {
 	}, [error]);
 
 	useEffect(() => {
-		if (data) {
+		if (isSuccess) {
 			setUserData(data?.data);
 		}
-	}, [data])
+	}, [data, isSuccess])
+
+	console.log(data);
+
 
 	return (
 		<div className='flex flex-col gap-2'>

@@ -1,28 +1,25 @@
 import { Outlet } from 'react-router-dom';
-import { useProfileQuery } from '../../services/api';
+import { useProfileQuery } from '../../services/Api/api';
 import { Navigate } from 'react-router-dom';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+
+import React from 'react';
 
 const ProtectedRoutes = () => {
-	const { data, error, isLoading } = useProfileQuery('');
+	const { data, error } = useProfileQuery('');
+	const token = sessionStorage.getItem('authToken')
 
-	return (
-		<>
-			{error ? (
-				<Navigate to="/" />
-			) : isLoading ? (
-				<> <Spin
-					className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
-					indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-				/></>
-			) : data ? (
-				<Outlet />
-			) : (
-				<>Can't tell what's up</>
-			)}
-		</>
-	);
+	if (token || data) {
+		return <Outlet />;
+	}
+
+	if (!token && !data) {
+		return <Navigate to="/login" />;
+	}
+
+	if (error) {
+		return <Navigate to="/login" />;
+	}
+
 };
 
 export default ProtectedRoutes;

@@ -8,7 +8,7 @@ interface IProps {
     count?: number
 }
 interface DataType {
-    _id: string;
+    id: number;
     name: string;
     email: string;
     role: string;
@@ -43,7 +43,7 @@ const Users = ({ data, count }: IProps) => {
             render: (_, record: DataType) => (
                 <Space size="middle">
                     <OutlineButton title='View Details' icon={<FaEdit />} onClick={() => {
-                        sessionStorage.setItem("adminId", record._id)
+                        sessionStorage.setItem("userId", String(record.id))
                     }} />
                 </Space>
             ),
