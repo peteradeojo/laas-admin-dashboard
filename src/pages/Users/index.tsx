@@ -6,8 +6,8 @@ import { Spin, notification } from 'antd';
 
 const Users = () => {
 	const [userData, setUserData] = useState();
-	const [page] = useState<number>(1);
-	const [count] = useState<number>(20);
+	const [page, setPage] = useState<number>(1);
+	const [count, setCount] = useState<number>(20);
 
 	const { data, isLoading, error, isSuccess } = useGetUsersQuery({ page: page, count: count });
 
@@ -24,12 +24,9 @@ const Users = () => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			setUserData(data?.data);
+			setUserData(data);
 		}
 	}, [data, isSuccess])
-
-	console.log(data);
-
 
 	return (
 		<div className='flex flex-col gap-2'>

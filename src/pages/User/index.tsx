@@ -22,7 +22,7 @@ const UserDisplay = ({ user }: UserProps) => {
 	return (
 		<>
 			<div className="pb-3">
-				<h1>{user.name}</h1>
+				<h1 className="h5">{user.name}</h1>
 				<h3>
 					<a href={`mailto:${user.email}`} target="_blank">
 						{user.email}
@@ -34,21 +34,20 @@ const UserDisplay = ({ user }: UserProps) => {
 				{user.apps?.map((app: any) => (
 					<div className="col-4 mx-1">
 						<GenericCard pops>
-							<h2 className="pb-1">{app.title}</h2>
+							<h2 className="h6">{app.title}</h2>
 							<p>
 								<b>Status: </b>{' '}
-								{app.token ? (
+								{app.token == '1' ? (
 									<>
-
+										Active
 										{/* <Tag tag="active" className="admin" /> */}
-
 									</>
 								) : (
-									<>
-										{/* <Tag tag="inactive" /> */}
-
-									</>
+									<>Inactive</>
 								)}
+							</p>
+							<p>
+								<b>Logs Generated:</b> {app.total_logs}
 							</p>
 							<p>
 								<b>Created: </b>
