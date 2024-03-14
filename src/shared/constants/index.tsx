@@ -1,6 +1,6 @@
 import { FiLogOut } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
-import { IoMdSettings } from "react-icons/io";
+import { IoMdAlert, IoMdSettings } from "react-icons/io";
 import { FaUserFriends } from "react-icons/fa";
 
 
@@ -34,6 +34,11 @@ export const sidebarItems = [
         key: "/dashboard/settings",
         icon: <IoMdSettings />,
         title: "Settings",
+    },
+    {
+        key: "/dashboard/alerts",
+        icon: <IoMdAlert />,
+        title: "Alerts",
     },
 
     {
