@@ -9,15 +9,24 @@ interface DataType {
 	from_system: number;
 	from_user: number;
 	level: string;
+	origin: string;
 }
 
-interface IAlertProps {
+interface IAlertTableProps {
 	data: any;
 	pageSize: number;
 	getPage(i: number, n: number): void;
 }
 
-const AlertsTable = ({ data, pageSize, getPage }: IAlertProps) => {
+interface IAlertProps {
+	alert: DataType;
+}
+
+const Alert = ({ alert }: IAlertProps) => {
+	return <></>;
+};
+
+const AlertsTable = ({ data, pageSize, getPage }: IAlertTableProps) => {
 	const columns: ColumnsType<DataType> = [
 		{
 			title: 'Level',
@@ -41,6 +50,17 @@ const AlertsTable = ({ data, pageSize, getPage }: IAlertProps) => {
 			),
 		},
 		{
+			title: 'Source',
+			key: 'role',
+			render: (_, record: DataType) => (
+				<>
+					<span className={`p-[6px] rounded-md ml-[6px] bg-[#FDB5281F] text-[#E89806]`}>
+						{record.origin}
+					</span>
+				</>
+			),
+		},
+		{
 			title: 'Message',
 			dataIndex: 'text',
 			render: (v, _) => v.slice(0, 20) + '...',
@@ -58,7 +78,7 @@ const AlertsTable = ({ data, pageSize, getPage }: IAlertProps) => {
 						title="View"
 						icon={<FaEdit />}
 						onClick={() => {
-							alert(record.level);
+							// alert(record.level);
 						}}
 					/>
 				</Space>
