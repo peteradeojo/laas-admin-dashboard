@@ -1,7 +1,7 @@
 import type { ColumnsType } from 'antd/es/table';
 import { useGetAlertsQuery } from '@/services/Api/alerts';
 import { Space, Spin, Table, notification } from 'antd';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OutlineButton } from '@/shared/UIs/CustomButton';
 import { FaEdit } from 'react-icons/fa';
 
@@ -22,11 +22,29 @@ interface IAlertProps {
 	alert: DataType;
 }
 
-const Alert = ({ alert }: IAlertProps) => {
-	return <></>;
+const AlertView: React.FC<{
+	alert: Partial<DataType> & any;
+	close: () => void;
+}> = ({ alert, close }) => {
+	return (
+		<>
+			<button onClick={close}>Close</button>
+			<div>
+				<p>Level: {alert.level}</p>
+				<p>Origin: {alert.origin}</p>
+				<p>Source: {alert.from_user == true ? 'USER' : 'SYSTEM'}</p>
+				<p>Message: {alert.text}</p>
+				<p>Stack: {alert.stack}</p>
+				<p>Context: {JSON.stringify(alert.context)}</p>
+				<p>{alert.createdAt}</p>
+			</div>
+		</>
+	);
 };
 
 const AlertsTable = ({ data, pageSize, getPage }: IAlertTableProps) => {
+	const [alert, setAlert] = useState<Partial<DataType> | undefined>(undefined);
+
 	const columns: ColumnsType<DataType> = [
 		{
 			title: 'Level',
@@ -40,12 +58,12 @@ const AlertsTable = ({ data, pageSize, getPage }: IAlertTableProps) => {
 			render: (_, record: DataType) => (
 				<span
 					className={`p-[6px] rounded-md ${
-						record.from_system
+						record.from_system == 1
 							? 'bg-[red] text-[#fff]'
 							: 'bg-[#FDB5281F] text-[#E89806]'
 					}`}
 				>
-					{record.from_system ? 'system' : 'user'}
+					{record.from_system == 1 ? 'system' : 'user'}
 				</span>
 			),
 		},
@@ -54,7 +72,9 @@ const AlertsTable = ({ data, pageSize, getPage }: IAlertTableProps) => {
 			key: 'role',
 			render: (_, record: DataType) => (
 				<>
-					<span className={`p-[6px] rounded-md ml-[6px] bg-[#FDB5281F] text-[#E89806]`}>
+					<span
+						className={`p-[6px] rounded-md ml-[6px] bg-[#FDB5281F] text-[#E89806]`}
+					>
 						{record.origin}
 					</span>
 				</>
@@ -78,7 +98,7 @@ const AlertsTable = ({ data, pageSize, getPage }: IAlertTableProps) => {
 						title="View"
 						icon={<FaEdit />}
 						onClick={() => {
-							// alert(record.level);
+							setAlert(record);
 						}}
 					/>
 				</Space>
@@ -113,6 +133,15 @@ const AlertsTable = ({ data, pageSize, getPage }: IAlertTableProps) => {
 				}}
 				bordered
 			/>
+
+			{alert ? (
+				<AlertView
+					alert={alert}
+					close={() => {
+						setAlert(undefined);
+					}}
+				/>
+			) : null}
 		</div>
 	);
 };
@@ -150,7 +179,7 @@ const Alerts = () => {
 
 				{isLoading ? (
 					<Spin />
-				) : (
+				) : isSuccess ? (
 					<AlertsTable
 						data={alertsData}
 						getPage={(page, pageSize) => {
@@ -159,7 +188,7 @@ const Alerts = () => {
 						}}
 						pageSize={pagesize}
 					/>
-				)}
+				) : null}
 			</div>
 		</>
 	);
